@@ -1,2 +1,2 @@
 
-import e5.lhcb
+from e5.lhcb import *
