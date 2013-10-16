@@ -52,6 +52,7 @@ install:
 
   # install uncertainties package used by some unit tests
   - pip install --user uncertainties
+  - pip install --user rootpy
 
 script:
 
