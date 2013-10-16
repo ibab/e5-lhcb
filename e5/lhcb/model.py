@@ -7,13 +7,12 @@ from .util import get_workspace
 
 
 def filter_content(lines):
+    lineno = 0
     for line in lines:
         line = line.strip()
-        if line.startswith('#'):
-            continue
-        if not line:
-            continue
-        yield line
+        if line and not line.startswith('#'):
+            yield (line, lineno)
+        lineno += 1
 
 def assemble_model(file):
     """
@@ -29,12 +28,10 @@ def assemble_model(file):
 
     logger.info('Assembling model file: \'%s\'' % file)
 
-    lineno = 1
-    for line in filter_content(file):
+    for line, lineno in filter_content(file):
         if not factory.process(line):
             logger.error('RooFit factory error at line %d', lineno)
             exit(1)
-        lineno += 1
 
     return w
 
