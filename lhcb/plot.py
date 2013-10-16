@@ -11,7 +11,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from .model import assemble_model
-from .fit import load_dataset
+from .util import load_dataset
 
 def set_lhcb_style():
     from matplotlib import rc
@@ -97,7 +97,6 @@ def plot_dimension(var, data, model, components=None, numcpus=1, xlabel='', extr
 
     plt.sca(ax)
     return ax
-
 
 def calc_pull(x, f, y, yerr):
     from numpy import zeros, NaN
@@ -205,7 +204,7 @@ def get_binned_data(x, data, extra_params=None, binning=None):
 def plot_cmd(config, args):
     from functools import partial
     from .config import get_named_section
-    from .fit import load_tree, load_dataset
+    from .util import load_tree, load_dataset
 
     import re
 

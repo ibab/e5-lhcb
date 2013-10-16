@@ -13,9 +13,9 @@ class Testlhcb:
         self.model = RooGaussian('model', 'model', self.x, self.mean, self.sigma)
         self.data = self.model.generate(RooArgSet(self.x), 1000)
 
-    def test_perform_fit(self):
-        from lhcb.fit import perform_fit
-        perform_fit(self.model, self.data)
+    def test_max_ap(self):
+        from lhcb.fit import max_ap
+        max_ap(self.model, self.data)
 
     def test_assemble_model(self):
         from lhcb.model import assemble_model
@@ -39,16 +39,9 @@ class Testlhcb:
         config = get_config(os.path.dirname(__file__) + '/../testdata/test.cfg')
         assert bool(get_named_section(config, 'named', 'first'))
 
-    def test_plot_hist(self):
-        from lhcb.plot import plot_hist, set_style
-        set_style()
-        plot_hist(self.x, self.model, self.data, fname='test.pdf', plotdir='.')
-        assert os.path.exists('test.pdf')
-        os.remove('test.pdf')
-
-    def test_splot(self):
-        from lhcb.fit import splot
-        sigData, bkgData = splot(self.model, self.data, ['sigN', 'bkgN'])
+    def test_add_weights(self):
+        from lhcb.fit import add_weights
+        sigData, bkgData = add_weights(self.model, self.data, ['sigN', 'bkgN'])
         assert sigData
         assert bkgData
 

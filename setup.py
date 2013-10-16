@@ -33,7 +33,7 @@ setup(name='lhcb',
       package_dir=packages,
       packages=packages.keys(),
       package_data={'': [
-          testdata/*,
+          'testdata/*',
       ]},
       scripts=['bin/fit'],
       install_requires=[

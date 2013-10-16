@@ -8,7 +8,11 @@ from .model import assemble_model, split_model
 import logging
 logger = logging.getLogger(__name__)
 
-def max_ap(model, data, start_params='None', out_params='result.params', numcpus=1, strategy=1, fit=True):
+def max_ap(model, data, start_params='None', out_params='result.params', numcpus=1, strategy=1, fit=True, extended=False):
+    """
+    Finds the maximum of the a posteriori probability of the model given the data.
+    Equivalent to finding the best estimate of the model parameters.
+    """
     from ROOT import RooFit
     if start_params == 'None':
         logger.warning('Not reading in initial parameters. Using defaults from model.')
@@ -23,7 +27,7 @@ def max_ap(model, data, start_params='None', out_params='result.params', numcpus
         results = model.fitTo(
                 data,
                 RooFit.NumCPU(numcpus),
-                RooFit.Extended(True),
+                RooFit.Extended(extended),
                 RooFit.Minos(False),
                 RooFit.Strategy(2),
                 RooFit.Minimizer('Minuit2'),
