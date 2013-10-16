@@ -19,7 +19,7 @@ class Testlhcb:
 
     def test_assemble_model(self):
         from lhcb.model import assemble_model
-        w = assemble_model(os.path.dirname(__file__) + '/test.model')
+        w = assemble_model(os.path.dirname(__file__) + '/../testdata/test.model')
         assert w
 
     def test_save_dataset(self):
@@ -36,7 +36,7 @@ class Testlhcb:
 
     def test_get_named_section(self):
         from lhcb.config import get_config, get_named_section
-        config = get_config(os.path.dirname(__file__) + '/test.cfg')
+        config = get_config(os.path.dirname(__file__) + '/../testdata/test.cfg')
         assert bool(get_named_section(config, 'named', 'first'))
 
     def test_plot_hist(self):
