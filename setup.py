@@ -32,6 +32,9 @@ setup(name='lhcb',
       url='',
       package_dir=packages,
       packages=packages.keys(),
+      package_data={'': [
+          testdata/*,
+      ]},
       scripts=['bin/fit'],
       install_requires=[
           "configobj",
