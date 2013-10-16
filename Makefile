@@ -20,7 +20,7 @@ clean-pyc:
 	@find . -name "*.pyc" -exec rm {} \;
 
 clean-so:
-	@find lhcb -name "*.so" -exec rm {} \;
+	@find e5 -name "*.so" -exec rm {} \;
 
 clean-build:
 	@rm -rf build
@@ -56,17 +56,17 @@ upload: clean
 	@$(PYTHON) setup.py sdist upload --release
 
 test-code: inplace
-	@$(NOSETESTS) -v -a '!slow' -s lhcb
+	@$(NOSETESTS) -v -a '!slow' -s e5
 
 test-code-full: inplace
-	@$(NOSETESTS) -v -s lhcb
+	@$(NOSETESTS) -v -s e5
 
 test-code-verbose: inplace
-	@$(NOSETESTS) -v -a '!slow' -s lhcb --nologcapture
+	@$(NOSETESTS) -v -a '!slow' -s e5 --nologcapture
 
 test-installed:
 	@(mkdir -p nose && cd nose && \
-	$(NOSETESTS) -v -a '!slow' -s --exe lhcb && \
+	$(NOSETESTS) -v -a '!slow' -s --exe e5 && \
 	cd .. && rm -rf nose)
 
 test-doc:
@@ -76,7 +76,7 @@ test-doc:
 test-coverage:
 	@rm -rf coverage .coverage
 	@$(NOSETESTS) -s --with-coverage --cover-html --cover-html-dir=coverage \
-	--cover-package=lhcb lhcb
+	--cover-package=e5 e5
 
 test-examples: clean-examples
 	@PYTHONPATH=$(PWD):$(PYTHONPATH); \
@@ -92,7 +92,7 @@ test-examples: clean-examples
 test: test-code test-doc
 
 trailing-spaces:
-	@find lhcb -name "*.py" | xargs perl -pi -e 's/[ \t]*$$//'
+	@find e5 -name "*.py" | xargs perl -pi -e 's/[ \t]*$$//'
 
 doc: inplace
 	@make -C docs/ html
@@ -106,7 +106,7 @@ check-rst:
 	@rm -f __output.html
 
 pep8:
-	@pep8 --exclude=.git,extern lhcb
+	@pep8 --exclude=.git,extern e5
 
 flakes:
 	@./run-pyflakes
